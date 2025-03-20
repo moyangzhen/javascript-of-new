@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>this的具体用法</h1>
+    <script>
+        var name='myz';
+        // 1.箭头函数的this绑定是根据外层的词法作用域决定的
+        function testThis(){
+            this.name='ldh'
+            setTimeout(()=>{
+                console.log(this.name);//ldh
+            },2000)
+        }
+        // testThis();
+
+        // 2.如果返回的是一个箭头函数，this会指向执行函数的外层，相当于全局中执行一个箭头函数
+        function testThis_1(){
+            var name='ldh1';
+                return ()=>{
+                    console.log(this.name)
+                }
+
+        }
+        // testThis_1()();
+
+        // 3.bind的用法
+        function testBind(){
+            return this.name+this.age
+        }
+        var bindObj={name:'myz22',age:'18'}
+        var bindFn=testBind.bind(bindObj);
+        console.log(bindFn());//myz2218
+    </script>
+</body>
+</html>
